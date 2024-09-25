@@ -1,4 +1,6 @@
 #!/bin/bash
+# use linux to run the file Execute the Bash script to process RNA-seq data and generate counts:
+#bash rna_seq_pipeline.sh
 
 # Set up directories
 mkdir -p fastq raw_data trimmed_data alignment counts results figures
