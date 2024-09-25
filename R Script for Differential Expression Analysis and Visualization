@@ -1,0 +1,52 @@
+# Load necessary libraries
+library(DESeq2)
+library(pheatmap)
+library(ggplot2)
+
+# 6. Differential Expression Analysis
+counts <- read.table("counts/counts.txt", header = TRUE, row.names = 1)
+colData <- data.frame(row.names = colnames(counts), condition = factor(c("Control", "Treatment")))
+
+dds <- DESeqDataSetFromMatrix(countData = counts, colData = colData, design = ~ condition)
+dds <- DESeq(dds)
+res <- results(dds)
+
+# Save results
+write.csv(res, file = "results/differential_expression_results.csv")
+
+# 7. Visualizations
+# PCA Plot
+vsd <- vst(dds)
+pcaData <- plotPCA(vsd, intgroup = "condition", returnData = TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+ggplot(pcaData, aes(PC1, PC2, color = condition)) +
+  geom_point(size = 3) +
+  xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+  ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+  theme_minimal()
+
+# Save PCA plot
+ggsave("figures/pca_plot.png")
+
+# Volcano Plot
+res$log2FoldChange <- ifelse(is.na(res$log2FoldChange), 0, res$log2FoldChange)
+res$padj <- ifelse(is.na(res$padj), 1, res$padj)
+
+ggplot(res, aes(x = log2FoldChange, y = -log10(padj))) +
+  geom_point(alpha = 0.4, size = 1.75) +
+  xlim(c(-10, 10)) +
+  ylim(c(0, 20)) +
+  xlab("Log2 Fold Change") +
+  ylab("-Log10 adjusted p-value") +
+  theme_minimal()
+
+# Save Volcano plot
+ggsave("figures/volcano_plot.png")
+
+# Heatmap of top differentially expressed genes
+top_genes <- head(order(res$padj), 20)
+mat <- assay(vsd)[top_genes, ]
+pheatmap(mat, cluster_rows = TRUE, cluster_cols = TRUE)
+
+# Save heatmap
+ggsave("figures/heatmap.png")
