@@ -13,14 +13,14 @@ Differential Gene Expression: Perform differential gene expression analysis with
 Visualization: Generate PCA plots, volcano plots, and heatmaps to visualize the results.
 
 <ul>
-├── fastqc_output/            # FastQC output files
-├── trimmed_data/             # Trimmed FASTQ files
-├── alignment/                # BAM files and their indices
-├── counts/                   # Gene count matrix
-├── results/                  # Differential expression analysis results
-├── figures/                  # PCA plots, volcano plots, and heatmaps
-├── scripts/                  # Bash and R scripts for each step
-└── README.md                 # This README file
+1 fastqc_output/            # FastQC output files
+2 trimmed_data/             # Trimmed FASTQ files
+3 alignment/                # BAM files and their indices
+4 counts/                   # Gene count matrix
+5 results/                  # Differential expression analysis results
+6 figures/                  # PCA plots, volcano plots, and heatmaps
+7 scripts/                  # Bash and R scripts for each step
+8 README.md                 # This README file
 </ul>
 
 
