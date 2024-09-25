@@ -5,7 +5,7 @@ This repository contains a complete pipeline for RNA-seq analysis, starting from
 <h1> Workflow Overview </h1>
 The pipeline consists of the following steps:
 
-Quality Control: Assess raw sequencing data quality using FastQC.
+<b>Quality Control: Assess raw sequencing data quality using FastQC.
 Read Trimming: Remove low-quality bases and adapter sequences using Trimmomatic.
 Alignment: Map reads to a reference genome using HISAT2.
 Quantification: Count the number of reads aligned to each gene using featureCounts.
