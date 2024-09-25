@@ -1,0 +1,8 @@
+Install dependencies: Before running the scripts, make sure you have the necessary tools installed:
+
+FastQC
+Trimmomatic
+HISAT2
+samtools
+featureCounts
+R libraries: DESeq2, pheatmap, ggplot2
