@@ -1,0 +1,6 @@
+Quality Control (using FastQC)
+Trimming (using Trimmomatic)
+Alignment (using HISAT2)
+Transcript quantification (using featureCounts)
+Differential Expression Analysis (using DESeq2)
+Visualizations (PCA, heatmaps, and volcano plots)
