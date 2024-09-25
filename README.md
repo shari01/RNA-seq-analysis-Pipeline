@@ -11,3 +11,4 @@ The pipeline consists of the following steps:
 <p>Quantification: Count the number of reads aligned to each gene using featureCounts.</p>
 <p>Differential Gene Expression: Perform differential gene expression analysis with DESeq2 in R.</p>
 <p>Visualization: Generate PCA plots, volcano plots, and heatmaps to visualize the results.</p>
+
