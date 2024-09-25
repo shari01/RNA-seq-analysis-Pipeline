@@ -37,6 +37,7 @@ Run FastQC on your raw sequencing data:
 
 #bash
 fastqc raw_data/*.fastq.gz -o fastqc_output/
+
 Check the fastqc_output/ folder for the HTML reports.
 
 Step 2: Trimming Reads (Trimmomatic)
@@ -44,12 +45,15 @@ Use Trimmomatic to clean your raw reads:
 
 # bash
 for file in raw_data/*.fastq.gz
+
 do
   base=$(basename ${file} .fastq.gz)
   java -jar trimmomatic.jar SE -phred33 \
       raw_data/${base}.fastq.gz \
       trimmed_data/${base}_trimmed.fastq.gz \
       LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+
+
 
 # Step 3: Aligning Reads (HISAT2)
 Align the trimmed reads to the reference genome:
@@ -59,6 +63,8 @@ for file in trimmed_data/*_trimmed.fastq.gz
 do
   base=$(basename ${file} _trimmed.fastq.gz)
   hisat2 -x reference_index -U ${file} -S alignment/${base}.sam
+
+
 
 # Convert SAM to BAM and sort:
 
@@ -75,14 +81,9 @@ Count reads mapped to genes:
 
 # bash
 featureCounts -T 4 -a genes.gtf -o counts/counts.txt alignment/*.sorted.bam
-Step 5: Differential Gene Expression Analysis (DESeq2)
-Run DESeq2 in R to perform differential expression analysis. Use the provided R script located in scripts/deseq2_analysis.R.
-
-
 
 # Run the script inside R
 source("scripts/deseq2_analysis.R")
-The differential expression results will be saved as results/differential_expression_results.csv.
 
 # Step 6: Visualization
 You can visualize the results using PCA, volcano plots, and heatmaps. These are included in the provided R scripts under the scripts/ folder.
